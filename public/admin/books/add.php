@@ -1,0 +1,152 @@
+
+ 
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Add New Book</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+
+
+<form class="form-horizontal well span4" action="controller.php?action=add" method="POST" autocomplete="off">
+ <div class="col-md-12"> 
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="small mb-1" for="IBSN">IBSN</label>
+                <div class="input-group">
+                    <input class="form-control " id="IBSN" name="IBSN" type="text" placeholder="Enter IBSN" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="openLibraryFetch">Fetch from OpenLibrary</button>
+                    </div>
+                </div>
+                <small id="openLibraryStatus" class="form-text text-muted">Use OpenLibrary to prefill details by ISBN.</small>
+            </div>
+        </div> 
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="BookTitle">Title</label><input class="form-control " id="BookTitle" name="BookTitle" type="text" placeholder="Enter Title" /></div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="BookDesc">Description</label><input class="form-control " id="BookDesc" name="BookDesc" type="text" placeholder="Enter Description" /></div>
+        </div>
+    </div>  
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="Author">Author</label><input class="form-control " id="Author" name="Author" type="text" placeholder="Enter Author" /></div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="small mb-1" for="PublishDate">Published Date</label>
+            <input type="text" 
+                class="form-control" 
+                name="PublishDate" 
+                id="PublishDate" 
+                placeholder="YYYY-MM-DD"
+                pattern="\d{4}-\d{2}-\d{2}"
+                title="Please enter date in YYYY-MM-DD format (e.g., 2023-05-15)"
+                maxlength="10"
+                oninput="formatDateInput(this)"
+                onblur="validateDateInput(this)">
+            <small class="date-format-help">Format: YYYY-MM-DD (e.g., 2023-12-31)</small>
+          </div>
+        </div>
+    </div>  
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="BookPublisher">Publisher</label><input class="form-control " id="BookPublisher" name="BookPublisher" type="text" placeholder="Enter Publisher" /></div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="Category">Category</label>
+                 <select class="form-control " name="Category" id="Category">
+                      <?php
+                      $categ = new Category();
+                      $cur = $categ->listofcategory(); 
+                      foreach ($cur as $category) {
+                        echo '<option>'.$category->Category.' </option>';
+                      }
+
+                   ?>
+              
+            </select> 
+          </div>
+        </div>
+    </div> 
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="DDecimal">Dewey Decimal</label><input class="form-control " id="DDecimal" name="DDecimal" type="text" placeholder="Enter Dewey Decimal" readonly="true" /></div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Type</label> 
+             <select class="form-control input-sm" name="BookType" id="BookType">
+              <option>Fiction</option>
+              <option>Non-Fiction</option>  
+              <option>Unknown</option>  
+          </select> </div>
+        </div>
+    </div>   
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="BookPrice">Price</label><input class="form-control " id="BookPrice" name="BookPrice" type="text" placeholder="Enter Price" /></div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group"><label class="small mb-1" for="Remarks">Remarks</label><input class="form-control " id="Remarks" name="Remarks" type="text" aria-describedby="emailHelp" placeholder="Enter Remarks" /></div>
+        </div>   
+    </div>   
+</div>
+
+       <div class="form-group">
+              <div class="col-md-8">
+                <label class="col-md-4 control-label" for=
+                "idno"></label>
+
+                <div class="col-md-8">
+                  <button class="btn btn-primary" name="savecourse" type="submit" ><span class="fa fa-save"></span> Save</button>
+               <!--   <button class="btn btn-primary" name="saveandnewcourse" type="submit" ><span class="fa fa-save"></span> Save and Add new</button> -->
+                </div>
+              </div>
+            </div>
+
+         
+            
+  </form> 
+
+</div>
+</div>
+</div>
+
+<script src="openlibrary.js"></script>
+<script>
+function formatDateInput(input) {
+    // Remove any non-digit characters
+    let value = input.value.replace(/\D/g, '');
+    
+    // Add hyphens automatically
+    if (value.length > 4) {
+        value = value.substring(0, 4) + '-' + value.substring(4);
+    }
+    if (value.length > 7) {
+        value = value.substring(0, 7) + '-' + value.substring(7);
+    }
+    
+    // Limit to 10 characters (YYYY-MM-DD)
+    input.value = value.substring(0, 10);
+    
+    // Validate as user types
+    validateDateInput(input);
+}
+
+function validateDateInput(input) {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (dateRegex.test(input.value)) {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+    } else {
+        input.classList.remove('is-valid');
+        if (input.value.length >= 4) { // Only show invalid after some input
+            input.classList.add('is-invalid');
+        }
+    }
+}
+</script>

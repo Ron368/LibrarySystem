@@ -22,3 +22,13 @@ Name: Watashi
 Email: alashroud143@gmail.com
 Phone: 09815332466
 Message: Hello
+
+
+--- NEW MESSAGE ---
+Type: General
+Name: tabibito
+Email: alashroud143@gmail.com
+Phone: 098765432
+Message: Tng ina mo
+Date: 2025-12-16 13:20:57
+

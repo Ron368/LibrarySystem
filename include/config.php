@@ -4,13 +4,21 @@ defined('user') ? null : define ("user", "root") ;
 defined('pass') ? null : define("pass","");
 defined('database_name') ? null : define("database_name", "db_onlinelibrary") ;
 
-$this_file = str_replace('\\', '/', __File__) ;
-$doc_root = $_SERVER['DOCUMENT_ROOT'];
+$project_root = str_replace('\\', '/', dirname(__DIR__));
+$public_root  = $project_root . '/public';
 
-$web_root =  str_replace (array($doc_root, "include/config.php") , '' , $this_file);
-$server_root = str_replace ('config/config.php' ,'', $this_file);
+$document_root = '';
+if (isset($_SERVER['DOCUMENT_ROOT'])) {
+    $document_root = str_replace('\\', '/', rtrim($_SERVER['DOCUMENT_ROOT'], '/'));
+}
 
+if (empty($document_root)) {
+    $document_root = $public_root;
+}
+
+$web_root_relative = trim(str_replace($document_root, '', $public_root), '/');
+$web_root = $web_root_relative === '' ? '/' : '/' . $web_root_relative . '/';
 
 define ('web_root' , $web_root);
-define('server_root' , $server_root);
+define('server_root' , $project_root . '/');
 ?>
