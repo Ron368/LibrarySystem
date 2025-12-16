@@ -1,14 +1,13 @@
-  -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2020 at 05:08 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 5.6.39
+-- Generation Time: Dec 07, 2025 at 02:08 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -34,14 +33,14 @@ CREATE TABLE `tblautonumbers` (
   `AUTOEND` int(11) NOT NULL,
   `AUTOINC` int(11) NOT NULL,
   `AUTOKEY` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblautonumbers`
 --
 
 INSERT INTO `tblautonumbers` (`AUTOID`, `AUTOSTART`, `AUTOEND`, `AUTOINC`, `AUTOKEY`) VALUES
-(1, '000', 17, 1, 'BorrowerID');
+(1, '000', 19, 1, 'BorrowerID');
 
 -- --------------------------------------------------------
 
@@ -57,7 +56,7 @@ CREATE TABLE `tblbooknumber` (
   `Author` varchar(90) NOT NULL,
   `PublishDate` date NOT NULL,
   `Publisher` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblbooknumber`
@@ -100,33 +99,35 @@ CREATE TABLE `tblbooks` (
   `OverAllQty` int(11) NOT NULL,
   `Donate` tinyint(1) NOT NULL,
   `Remarks` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblbooks`
 --
 
 INSERT INTO `tblbooks` (`BookID`, `IBSN`, `BookTitle`, `BookDesc`, `Author`, `PublishDate`, `BookPublisher`, `Category`, `BookPrice`, `BookQuantity`, `Status`, `BookType`, `DeweyDecimal`, `OverAllQty`, `Donate`, `Remarks`) VALUES
-(1, '12345678', 'life of juan', 'life of jose and maria', 'unknown', '2016-10-10', 'unknown', 'History and Geography', 175, 1, 'Not Available', 'Fiction', '900', 1, 0, 'Donate'),
-(2, '12345671', 'the computerizez system', 'computer', 'unknown', '2016-10-10', 'unknown', 'Technology', 200, 1, 'Not Available', 'Fiction', '600', 1, 0, 'Donate'),
-(3, '12345672', 'languages', 'language', 'unknown', '0000-00-00', 'unknown', 'Language', 180, 1, 'Not Available', 'Non-Fiction', '400', 1, 0, 'Purchased'),
-(4, '12345673', 'Living Things', 'invention of science', 'unknown', '2016-10-10', 'unknown', 'Science', 185, 1, 'Not Available', 'Non-Fiction', '500', 1, 0, 'Purchased'),
-(6, '1345673', 'life of juan', 'life of juan', 'unknown', '2016-10-10', 'unknown', 'History and Geography', 185, 1, 'Not Available', 'Fiction', '900', 1, 0, 'Purchased'),
-(7, '14256372', 'Mother Nature', 'invention of science', 'unknown', '2016-10-10', 'unknown', 'Science', 185, 1, 'Not Available', 'Fiction', '500', 1, 0, 'Purchased'),
-(8, '15243678', 'book', 'book revised', 'unknown', '2016-10-10', 'unknown', 'Technology', 109, 1, 'Available', 'Fiction', '600', 1, 0, 'Purchased'),
-(9, '15263712', 'language of us', 'language', 'unknown', '2016-10-10', 'unknown', 'Language', 100, 1, 'Available', 'Fiction', '400', 1, 0, 'Donate'),
-(10, '19872634', 'book', 'book revised', 'unknown', '2016-10-10', 'unknown', 'Technology', 190, 1, 'Available', 'Fiction', '600', 1, 0, 'Purchased'),
-(11, '18293746', 'the only book', 'book', 'unknown', '2016-10-10', 'uknown', 'Arts and Recreation', 120, 1, 'Available', 'Unknown', '700', 1, 0, 'Donate'),
-(12, '11726354', 'book  now', 'book', 'unknown', '2016-10-10', 'unknown', 'Arts and Recreation', 150, 1, 'Not Available', 'Unknown', '700', 1, 0, 'Purchased'),
-(13, '10928273', 'the one', 'book1', 'unknown', '2016-10-10', 'unknown', 'Social Science', 210, 1, 'Available', 'Unknown', '300', 1, 0, 'Purchased'),
-(14, '10987654', 'book', 'book3', 'unknown', '2016-10-16', 'unknown', 'Technology', 125, 1, 'Available', 'Unknown', '600', 1, 0, 'Purchased'),
-(15, '98172634', 'the life of june', 'journey', 'unknown', '2016-10-10', 'unknown', 'Science', 100, 1, 'Available', 'Fiction', '500', 1, 0, 'Donate'),
-(16, '19282736', 'the life of june', 'journey', 'unknown', '2016-10-16', 'unknown', 'Science', 100, 1, 'Available', 'Non-Fiction', '500', 1, 0, 'Purchased'),
-(17, '9812345', 'book', 'one', 'unkwon', '2016-11-14', 'unkown', 'Language', 90, 1, 'Available', 'Fiction', '400', 1, 0, 'Purchased'),
-(18, '12345670', 'the computerizez system', 'computer', 'un', '2016-10-10', 'unknown', 'Computers, Information and General Reference', 200, 1, 'Available', 'Fiction', '000', 1, 0, 'Purchased'),
-(19, '12345677', 'life of juan', 'life of juan and jose', 'unknown', '2016-10-10', 'unknown', 'History and Geography', 900, 1, 'Available', 'Fiction', '900', 1, 0, 'Donate'),
-(21, '9876547', 'title', 'book', 'unknown', '2016-10-10', 'unknown', 'Technology', 370, 1, 'Available', 'Fiction', '600', 1, 0, 'Purchased'),
-(23, '117263548', 'book  now', 'book one', 'unknown', '0000-00-00', 'unknown', 'ALL', 23, 1, 'Available', '', '', 1, 0, 'Purchased');
+(24, '9780071183581', 'Data Structures with C++', 'Schaum\'s presents the most up-to-date study guide on Data Structures, simplifying and demonstrating difficult concepts through solved problems and examples.', 'John Hubbard', '2000-08-01', 'McGraw-Hill Education - Europe', 'Generalities', 0, 1, 'Available', 'Non-Fiction', '001-099', 1, 0, ''),
+(25, '9780672321047', 'Sams Teach Yourself Microsoft Frontpage 2002 in 24 Hours', ' Written by the popular author, Rogers Cadenhead, Sams Teach Yourself Microsoft FrontPage in 24 Hours is designed precisely for this beginning-level user - somebody who doesn\'t want to become a FrontPage expert but just wants to get a Web site up as quick', 'Rogers Cadenhead', '2001-01-01', 'Sams', 'Generalities', 0, 1, 'Available', 'Non-Fiction', '001-099', 1, 0, ''),
+(26, '9781844540600', 'The Ultimate Book of Useless Information', 'Hot on the heels of the sensational success of the first Book of Useless Information, the Official Useless Information Society bring you another essential compendium of everything you never needed but always wanted to know.', 'K Et Al Waterhouse', '2004-01-01', 'Blake Publishing', 'Generalities', 0, 1, 'Available', 'Non-Fiction', '001-099', 1, 0, ''),
+(27, '9780340747605', 'Research Methods and Statistics in Psychology', 'The new edition of this market-leading textbook has been updated and revised to embrace current developments in this area of psychology.', 'Hugh Coolican', '2002-10-10', 'Hodder Education Publishers', 'Philosophy and Psychology', 0, 1, 'Available', 'Non-Fiction', '100-199', 1, 0, ''),
+(28, '9780007115129', 'Psychology for A2', '', 'Mike Cardwell, Liz Clark, and Claire Meldrum', '2001-01-01', 'Collins Educational', 'Philosophy and Psychology', 0, 1, 'Available', 'Non-Fiction', '100-199', 1, 0, ''),
+(29, '9780972979405', 'Absolute Impact: The Drive for Personal Leadership', 'Absolute Impact is a leadership fable that penetrates the deeper issues involved in achieving significant postive impact in work and life.', 'Matthew May', '2003-10-01', 'Peloton Publishing', 'Philosophy and Psychology', 0, 1, 'Not Available', 'Non-Fiction', '100-199', 1, 0, ''),
+(30, '9781841930688', 'The Fundamentals of Drawing', 'An experienced artist and teacher introduces the time-honored, proven principles of good drawing. More than 350 illustrations and comprehensive instructions teach all the basic techniques.', 'Barrington Barber', '2001-01-01', 'Arcturus Publishing Ltd', 'Arts and Recreation', 0, 1, 'Available', 'Non-Fiction', '700-799', 1, 0, ''),
+(31, '9780764551048', 'Art For Dummies', 'If you\'ve always wanted to find out more about art but felt intimidated by the overeducated art world, then you\'ve found the answer. Art For Dummies is the book that will have you and everyone you know clamoring outside the doors of your local museum.', 'Thomas Hoving', '1999-09-24', 'For Dummies', 'Arts and Recreation', 0, 1, 'Available', 'Non-Fiction', '700-799', 1, 0, ''),
+(32, '9781855013995', 'The Amazing Book of Card Tricks', '', 'jon-tremaine', '1994-01-01', 'Tiger Books', 'Generalities', 0, 1, 'Not Available', 'Non-Fiction', '001-099', 1, 0, ''),
+(33, '9780070637887', 'Deux Mondes: A Communicative Approach French Edition for Student', '', 'Tracy D. Terrell, Marguerite Wolff-Hessini, Mary B. Rogers, and Betsy K. Barnes', '1993-01-01', 'McGraw-Hill College', 'Language', 0, 1, 'Available', 'Non-Fiction', '400-499', 1, 0, ''),
+(34, '9780838459324', 'Motifs: An Introduction to French', 'MOTIFS immerses students in French and encourages them to become active participants in learning about the language and its people. Grammar appears strategically at the end of the chapter for handy reference and easy self study.', 'Kimberly Jansma and Margaret Ann Kassen', '2003-11-07', 'Cengage Learning', 'Language', 0, 1, 'Available', 'Non-Fiction', '400-499', 1, 0, ''),
+(35, '9780070253674', 'Insieme: An Intermediate Italian', '', 'Romana Habekovic and Claudio Mazzola', '1994-01-01', 'McGraw-Hill College', 'Language', 0, 1, 'Available', 'Non-Fiction', '400-499', 1, 0, ''),
+(36, '9780316172387', 'An Unfinished Life: John F. Kennedy, 1917-1963', 'An Unfinished Life is the first major, single-volume life of John F. Kennedy to be written by a historian in nearly four decades.', 'Robert Dallek', '2003-05-01', 'Little, Brown and Company', 'Generalities', 0, 1, 'Available', 'Non-Fiction', '001-099', 1, 0, ''),
+(37, '9780078034916', 'Discovering Our Past: A Brief Introduction to Archaeology', 'Discovering Our Past: A Brief Introduction to Archaeology introduces students to the techniques, methods, and theoretical frameworks of contemporary archaeology in a brief format.', 'Wendy Ashmore and Robert Sharer', '2013-03-04', 'McGraw-Hill Education', 'Generalities', 0, 1, 'Available', 'Non-Fiction', '001-099', 1, 0, ''),
+(38, '9780935697063', 'Payments Due: Onstage Offstage', 'Payments Due has been a catalyst for women from every walk of life. It has been passed around in women\'s groups, read on construction sites, and quoted in courtrooms.', 'Carol Connolly', '1995-01-01', 'Midwest Villages & Voices Pubn', 'Literature', 0, 1, 'Available', 'Non-Fiction', '800-899', 1, 0, ''),
+(39, '9780671683061', 'The Book of Virtues: A Treasury of Great Moral Stories', 'A senior editor of National Review and leading conservative spokesperson provides commentary to accompany this anthology of character-building stories from history, the Bible, and such poets as Frost and Angelou.', 'William J. Bennett', '1993-01-01', 'Simon & Schuster', 'Literature', 0, 1, 'Available', 'Fiction', '800-899', 1, 0, ''),
+(40, '9780070551091', 'Introduction to Financial Management', '', 'Lawrence D. Schall', '1986-01-01', 'McGraw-Hill Companies', 'Natural Science and Applied Science', 0, 1, 'Available', 'Non-Fiction', '500-599', 1, 0, ''),
+(41, '9781592700172', 'Science: 100 Scientists Who Changed the World', 'To be alive today is to be confronted by the products of science--from aspirin, refrigeration, electric light and the telephone, to the airplane and the computer--to name just a few.', 'Jon Balchin', '2003-10-01', 'Enchanted Lion Books', 'Natural Science and Applied Science', 0, 1, 'Available', 'Non-Fiction', '500-599', 1, 0, ''),
+(42, '9780631151647', 'Introduction to Social Psychology: A European Perspective', '', 'Miles et al Hewstone', '1994-01-01', 'Blackwell', 'Social Science', 0, 1, 'Available', 'Non-Fiction', '300-399', 1, 0, ''),
+(43, '9781570431029', 'Turning Points: Discover How to Handle Change in Your Life', 'You\'re at a crossroads, a turning point.', 'Mary Carroll Moore', '1995-01-01', 'Eckankar', 'Social Science', 0, 1, 'Available', 'Non-Fiction', '300-399', 1, 0, ''),
+(44, '9780715141373', 'Life Calling: A 5-Session Course on Vocation for Lent', 'Some people think that vocation is just for special people, but God calls us all to live our lives shaped and directed by his call. ', 'Robert Warren and Kate Bruce', '2007-10-19', 'Church House Publishing', 'Religion', 0, 1, 'Available', 'Non-Fiction', '200-299', 1, 0, ''),
+(45, '9781841010168', 'On the Way to Bethlehem: Reflections on Christmas for Every Day in Advent', '', 'Hilary-mcdowell', '1632-01-01', 'Bible Reading Fellowship', 'Religion', 0, 1, 'Available', 'Non-Fiction', '200-299', 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -149,24 +150,15 @@ CREATE TABLE `tblborrower` (
   `Stats` varchar(36) NOT NULL,
   `BUsername` varchar(90) NOT NULL,
   `BPassword` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblborrower`
 --
 
 INSERT INTO `tblborrower` (`IDNO`, `BorrowerId`, `Firstname`, `Lastname`, `MiddleName`, `Address`, `Sex`, `ContactNo`, `CourseYear`, `BorrowerPhoto`, `BorrowerType`, `Stats`, `BUsername`, `BPassword`) VALUES
-(1, '119', 'jom', 'lozada', 'baron', 'ilog', 'Female', '0920', 'BEED', 'photos/02052020123045077db70b-ab84-46c4-bbaa-a5dd6b7332a4_200x200.png', 'Students', 'Active', 'jom', ''),
-(2, '213', 'Janno', 'Palacios', 'E', 'kabankalan City', 'Male', '0192836383', 'BSIT-2', 'Chrysanthemum.jpg', 'Student', 'Active', '', ''),
-(3, '912', 'lou', 'gotera', 'velez', 'rizal', 'Female', '0930', 'BSIT', 'bhl-logo.jpg', 'Student', 'Active', '', ''),
-(4, '921', 'joma', 'baron', 'lozada', 'dancalan', 'Female', '0921', '', 'Desert.jpg', 'Student', '', '', ''),
-(5, '1234', 'ambot', 'sure', 'guess', 'unknown', 'Male', '0907', 'ELECTRONICS', 'Koala.jpg', 'Student', 'NotActive', '', ''),
-(6, '4321', 'John Craig', 'Nillos', 'Palacios', 'Dancalan Ilog', 'Male', '1233213123', 'BSIT-1', 'Wonderful-Room-King.jpg', 'Student', 'Active', '', ''),
-(7, '9213', 'lou', 'velez', 'gotera', 'rizal', 'Female', '0930', 'BSIT', 'Lighthouse.jpg', 'Student', 'NotActive', '', ''),
-(8, '54321', 'virgel', 'tem', 'brevilla', 'unknown', 'Female', '0930', 'BEED', 'ARIEL 6.jpg', 'Student', 'Active', '', ''),
-(9, '123432', 'Mark', 'Palacios', 'E', 'Galicia Ilog', 'Male', '09291918272', 'HRM-1', 'Chrysanthemum.jpg', 'Student', 'Active', '', ''),
-(22, '202000015', 'sad', 'sad', 'sad', 'asd', 'Female', 'asd', '213', 'photos/', 'Students', 'Active', 'asd', 'f10e2821bbbea527ea02200352313bc059445190'),
-(23, '202000016', 'Jean', 'Sy', 'Ong', 'Philippines', 'Female', '0923564521', 'AB-English', 'photos/04052020042948110218.jpg', 'Students', 'Active', 'Jean', '8c34f90c4d920b3126a0a0bf4aecf2a820fce8a7');
+(24, '202500017', 'Michael ', 'Flores', 'Diokno', 'Manila', 'Male', '09847265321', 'BSIT-2', 'photos/', 'Students', 'Active', 'michaelflores', '20eabe5d64b0e216796e834f52d61fd0b70332fc'),
+(25, '202500018', 'Kenji Darrel', 'Arrado', 'Senoc', 'Ampayon, Butuan City ', 'Male', '09754070918', 'BSIT-2', 'photos/22052025052509cat mugshot.jpg', 'Students', 'Active', 'kenjigwapo123', 'b0399d2029f64d445bd131ffaa399a42d2f8e7dc');
 
 -- --------------------------------------------------------
 
@@ -178,23 +170,23 @@ CREATE TABLE `tblcategory` (
   `CategoryId` int(11) NOT NULL,
   `Category` varchar(125) NOT NULL,
   `DDecimal` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblcategory`
 --
 
 INSERT INTO `tblcategory` (`CategoryId`, `Category`, `DDecimal`) VALUES
-(1, 'Computers, Information and General Reference', '000'),
-(2, 'Philosophy and Psychology', '100'),
-(3, 'Religion', '200'),
-(4, 'Social Science', '300'),
-(5, 'Language', '400'),
-(6, 'Science', '500'),
+(1, 'Generalities', '001-099'),
+(2, 'Philosophy and Psychology', '100-199'),
+(3, 'Religion', '200-299'),
+(4, 'Social Science', '300-399'),
+(5, 'Language', '400-499'),
+(6, 'Natural Science and Applied Science', '500-599'),
 (7, 'Technology', '600'),
-(8, 'Arts and Recreation', '700'),
-(9, 'Literature', '800'),
-(10, 'History and Geography', '900'),
+(8, 'Arts and Recreation', '700-799'),
+(9, 'Literature', '800-899'),
+(10, 'Geography and History ', '900-999'),
 (12, 'ALL', 'ALL');
 
 -- --------------------------------------------------------
@@ -208,7 +200,7 @@ CREATE TABLE `tbllogs` (
   `UserId` int(11) NOT NULL,
   `LogDate` datetime NOT NULL,
   `LogMode` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbllogs`
@@ -712,7 +704,7 @@ CREATE TABLE `tblpayment` (
   `DatePayed` date NOT NULL,
   `BorrowerId` int(11) NOT NULL,
   `Remarks` varchar(125) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblpayment`
@@ -746,7 +738,7 @@ CREATE TABLE `tbltransaction` (
   `Returned` tinyint(1) NOT NULL,
   `DateReturned` datetime NOT NULL,
   `Remarks` varchar(90) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbltransaction`
@@ -792,8 +784,11 @@ INSERT INTO `tbltransaction` (`TransactionID`, `IBSN`, `NoCopies`, `DateBorrowed
 (39, '12345670', 1, '2020-05-04 01:31:00', '1 week', 'Cancelled', '2020-05-11 01:31:00', 20200003, 0, 0, 0, '2020-05-11 00:00:00', 'Cancelled'),
 (42, '12345672', 1, '2020-05-04 00:00:00', '1 week', 'Confirmed', '2020-05-11 01:37:00', 20200003, 1, 0, 0, '2020-05-11 00:00:00', 'Borrowed for on Week'),
 (43, '12345673', 1, '2020-05-04 00:00:00', '1 week', 'Confirmed', '2020-05-11 01:38:00', 20200003, 1, 0, 0, '2020-05-11 00:00:00', 'Borrowed for on Week'),
-(44, '14256372', 1, '2020-05-04 04:28:00', '1 week', 'Pending', '2020-05-11 04:28:00', 202000015, 1, 0, 0, '2020-05-11 00:00:00', 'Borrowed for on Week'),
-(45, '11726354', 1, '2020-05-04 04:29:00', '1 week', 'Pending', '2020-05-11 04:29:00', 202000016, 1, 0, 0, '2020-05-11 00:00:00', 'Borrowed for on Week');
+(44, '14256372', 1, '2025-05-03 00:00:00', '1 week', 'Confirmed', '2020-05-11 04:28:00', 202000015, 1, 0, 0, '2020-05-11 00:00:00', 'Borrowed for on Week'),
+(45, '11726354', 1, '2025-05-03 00:00:00', '1 week', 'Confirmed', '2020-05-11 04:29:00', 202000016, 1, 0, 0, '2020-05-11 00:00:00', 'Borrowed for on Week'),
+(46, '9781855013995', 1, '2025-05-09 00:00:00', '1 week', 'Confirmed', '2025-05-16 04:29:00', 202500017, 1, 0, 0, '2025-05-16 00:00:00', 'Borrowed for on Week'),
+(47, '9780070253674', 1, '2025-05-09 00:00:00', '1 week', 'Returned', '2025-05-16 04:30:00', 202500017, 0, 1, 1, '2025-05-22 06:02:00', 'Over Due'),
+(48, '9780972979405', 1, '2025-05-22 05:24:00', '1 week', 'Pending', '2025-05-29 05:24:00', 202500018, 1, 0, 0, '2025-05-29 00:00:00', 'Borrowed for on Week');
 
 -- --------------------------------------------------------
 
@@ -809,14 +804,14 @@ CREATE TABLE `tblusers` (
   `TYPE` varchar(125) NOT NULL,
   `Status` varchar(11) NOT NULL,
   `PicLoc` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblusers`
 --
 
 INSERT INTO `tblusers` (`USERID`, `NAME`, `UEMAIL`, `PASS`, `TYPE`, `Status`, `PicLoc`) VALUES
-(3, 'Janno Palacios', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', 'Active', 'img/bhl-logo.jpg');
+(3, 'Ronald Aguillas', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', 'Active', 'img/bhl-logo.jpg');
 
 --
 -- Indexes for dumped tables
@@ -897,13 +892,13 @@ ALTER TABLE `tblbooknumber`
 -- AUTO_INCREMENT for table `tblbooks`
 --
 ALTER TABLE `tblbooks`
-  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `BookID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tblborrower`
 --
 ALTER TABLE `tblborrower`
-  MODIFY `IDNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `IDNO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tblcategory`
@@ -927,7 +922,7 @@ ALTER TABLE `tblpayment`
 -- AUTO_INCREMENT for table `tbltransaction`
 --
 ALTER TABLE `tbltransaction`
-  MODIFY `TransactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `TransactionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tblusers`

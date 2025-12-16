@@ -6,9 +6,10 @@
 //(\ for windows, / for Unix)
 defined('DS') ? null : define('DS', DIRECTORY_SEPARATOR);
 
-defined('SITE_ROOT') ? null : define ('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'].DS.'LibrarySystem');
+defined('SITE_ROOT') ? null : define ('SITE_ROOT', dirname(dirname(__FILE__)));
 
 defined('LIB_PATH') ? null : define ('LIB_PATH',SITE_ROOT.DS.'include');
+defined('BORROWER_PHOTO_PATH') ? null : define('BORROWER_PHOTO_PATH', SITE_ROOT.DS.'public'.DS.'admin'.DS.'borrower'.DS.'photos'.DS);
 
 //load the database configuration first.
 require_once(LIB_PATH.DS."config.php");
