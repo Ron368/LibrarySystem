@@ -1,144 +1,198 @@
 <?php 
     global $mydb;
-    $category = isset($_GET['category']) ? $_GET['category'] : ''; 
-    $page = isset($_GET['page']) ? $_GET['page'] : 1; 
+
+    // Inputs (support existing ?category=... links, plus new ?search=...&sort=...)
+    $category = isset($_GET['category']) ? $_GET['category'] : '';
+    $search   = isset($_GET['search']) ? $_GET['search'] : '';
+    $sort     = isset($_GET['sort']) ? $_GET['sort'] : 'top';
+    $page     = isset($_GET['page']) ? $_GET['page'] : 1;
 
     $category = $mydb->escape_value($category);
-    $page = max(1, (int)$page);
- 
-        $no_of_records_per_page = 10;
-        $offset = ($page-1) * $no_of_records_per_page; 
+    $search   = $mydb->escape_value($search);
+    $sort     = $mydb->escape_value($sort);
+    $page     = max(1, (int)$page);
 
-        $total_pages_sql = "SELECT * FROM tblbooks WHERE Status='Available' AND Category LIKE '%$category%' "; 
-        $mydb->setQuery($total_pages_sql);
-        $cur = $mydb->executeQuery();
-        $total_rows = $mydb->num_rows($cur);
-        $total_pages = ceil($total_rows / $no_of_records_per_page);
- 
-        $sql = "SELECT * FROM `tblbooks`  WHERE Status='Available' AND Category LIKE '%$category%' LIMIT $offset, $no_of_records_per_page"; 
-        $mydb->setQuery($sql);
-        $cur = $mydb->executeQuery();
-        $maxrow = $mydb->num_rows($cur);
+    $no_of_records_per_page = 12;
+    $offset = ($page - 1) * $no_of_records_per_page;
 
-    
-   ?>
-        
-        <!-- Start Blog Page Section -->
-        <div class="container">
-            <div class="row">
+    $where = "Status='Available'";
+    if ($category !== '') {
+      $where .= " AND Category LIKE '%{$category}%'";
+    }
+    if ($search !== '') {
+      $where .= " AND (BookTitle LIKE '%{$search}%' OR Author LIKE '%{$search}%' OR IBSN LIKE '%{$search}%')";
+    }
 
-                
-                <!-- Start Blog Body Section -->
-                <div class="col-md-8 blog-body"> 
+    $orderBy = "BookTitle ASC"; // fallback
+    switch ($sort) {
+      case 'title_az':
+        $orderBy = "BookTitle ASC";
+        break;
+      case 'title_za':
+        $orderBy = "BookTitle DESC";
+        break;
+      case 'newest':
+        $orderBy = "PublishDate DESC";
+        break;
+      case 'oldest':
+        $orderBy = "PublishDate ASC";
+        break;
+      case 'top':
+      default:
+        // No rating field exists; keep stable ordering for now
+        $orderBy = "BookTitle ASC";
+        break;
+    }
 
-                     <?php
-  
+    // total rows
+    $total_pages_sql = "SELECT IBSN FROM tblbooks WHERE {$where}";
+    $mydb->setQuery($total_pages_sql);
+    $curCount = $mydb->executeQuery();
+    $total_rows = $mydb->num_rows($curCount);
+    $total_pages = (int)ceil($total_rows / $no_of_records_per_page);
 
-                        $sql = "SELECT * FROM `tblbooks`  WHERE Category LIKE '%$category%' GROUP BY BookTitle LIMIT $offset, $no_of_records_per_page"; 
-                        $mydb->setQuery($sql);
-                        $cur = $mydb->loadResultlist();
-                        foreach ($cur as $result) {
+    // page rows
+    $sql = "SELECT * FROM tblbooks WHERE {$where} ORDER BY {$orderBy} LIMIT {$offset}, {$no_of_records_per_page}";
+    $mydb->setQuery($sql);
+    $cur = $mydb->loadResultlist();
+?>
 
-                     ?>
-                              <!-- Start Blog post -->
-                            <div class="blog-post"> 
-                                <h1 class="post-title"><a href="index.php?q=bookdetails&id=<?php echo $result->IBSN;?>"><?php echo $result->BookTitle;?></a></h1>
-                                
-                                <ul class="post-meta">
-                                    <li><i class="fa fa-calendar"> </i><?php echo $result->PublishDate;?></li>
-                                    <li><i class="fa fa-user"> </i> <?php echo $result->Author;?></li>
-                                    <li><i class="fa fa-tags"> </i><a href="index.php?q=books&category=<?php echo $result->Category;?>"><?php echo $result->Category;?></a></li>    
-                                </ul>
-                                
-                                <p class="post-content"> <?php echo $result->BookDesc;?></p>
-                                <a href="index.php?q=bookdetails&id=<?php echo $result->IBSN;?>" class="btn btn-primary ">Read more...<i class="fa fa-angle-right"></i></a>
-                            </div>
-                            <!-- End Blog Post -->
+<div class="books-v2">
+  <div class="container">
+    <header class="books-v2__header">
+      <h1 class="books-v2__title">Explore Our Collection</h1>
+      <p class="books-v2__subtitle">
+        Discover thousands of books across all genres. Search, filter, and find your next favorite read.
+      </p>
 
-    
-                      <?php  }     ?>
+      <form class="books-v2__filters" action="index.php" method="GET" autocomplete="off">
+        <input type="hidden" name="q" value="books" />
 
-          
-                    <!-- Start Pagination -->         
-                    <nav>
-                    <?php if ($maxrow > 0) { ?>
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="index.php?q=books&category=<?php echo $category;?>&page=1">First</a></li>
-                        <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                            <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo "index.php?q=books&category=".$category."&page=".($page - 1); } ?>">Prev</a>
-                        </li>
-                        <li class="page-item <?php if($page >= $total_pages){ echo 'disabled'; } ?>">
-                            <a class="page-link" href="<?php if($page >= $total_pages){ echo '#'; } else { echo "index.php?q=books&category=".$category."&page=".($page + 1); } ?>">Next</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="index.php?q=books&category=<?php echo $category;?>&page=<?php echo $total_pages; ?>">Last</a></li>
-                    </ul>
-                    <?php }else{ echo '<h1>No Record Found!</h1>';} ?> 
-                    </nav>
-                    <!-- 
-                    <nav>
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#" aria-label="Start">Start</a></li>
-                            <li class="disabled"><a href="#" aria-label="Previous">Prev</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">Next</a></li>
-                            <li><a href="#">End</a></li>
-                        </ul>
-                    </nav> -->
-                    <!-- End Pagination -->
-                    
-                </div>
-                <!-- End Blog Body Section -->
-                
-                                <!-- Start Sidebar Section -->
-                <div class="col-md-4 sidebar right-sidebar">
-                     
-                    
-                    <!-- Start Blog categories widget -->
-                    <div class="widget widget-categories">
-                        
-                        <div class="section-heading-2">
-                            <h3 class="section-title">
-                                <span>Book Categories</span>
-                            </h3>
-                        </div>
-                        <style type="text/css">
-                            .selected{
-                                color: #FF432E;
-                            }
-                        </style>
-                        <ul>
-                             <?php
-                                $category = new Category();
-                                $cur = $category->listOfcategory(); 
-                                foreach ($cur as $category) { 
-                                    if ($category==$category->Category) {
-                                        # code...
-                                         echo ' <li style="color:#FF432E">
-                                                <i class="fa fa-angle-double-right"></i>
-                                                <a  style="color:#FF432E" href="index.php?q=books&category='.$category->Category.'">'.$category->Category .'</a> 
-                                            </li> ';
-                                    }else{
-                                             echo '<li>
-                                                <i class="fa fa-angle-double-right"></i>
-                                                <a   href="index.php?q=books&category='.$category->Category.'">'.$category->Category .'</a> 
-                                            </li> ';
-                                    }
-                                   
-                                }
-                            ?>
-                           
-                        </ul>
-                        
-                    </div>
-                    <!-- End Blog categories widget -->
-          
-                </div>
-                <!-- End Sidebar Section -->
-
-                
-            </div>
+        <div class="books-v2__search">
+          <i class="fa fa-search books-v2__search-icon" aria-hidden="true"></i>
+          <input
+            class="books-v2__search-input"
+            type="text"
+            name="search"
+            value="<?php echo htmlspecialchars($search, ENT_QUOTES, 'UTF-8'); ?>"
+            placeholder="Search by Title, Author, or ISBN..."
+            aria-label="Search by Title, Author, or ISBN"
+          />
         </div>
-        <!-- End Blog Page Section -->
-        
-        
+
+        <div class="books-v2__selects">
+          <label class="books-v2__select">
+            <span class="books-v2__select-label">Genre:</span>
+            <select name="category" onchange="this.form.submit()">
+              <option value="">ALL</option>
+              <?php
+                $catObj = new Category();
+                $cats = $catObj->listOfcategory();
+                foreach ($cats as $cat) {
+                  $val = $cat->Category;
+                  $selected = ($category !== '' && $category === $val) ? ' selected' : '';
+                  echo '<option value="'.htmlspecialchars($val, ENT_QUOTES, 'UTF-8').'"'.$selected.'>'
+                        .htmlspecialchars($val, ENT_QUOTES, 'UTF-8').
+                      '</option>';
+                }
+              ?>
+            </select>
+          </label>
+
+          <label class="books-v2__select">
+            <span class="books-v2__select-label">Sort:</span>
+            <select name="sort" onchange="this.form.submit()">
+              <option value="top" <?php echo ($sort === 'top') ? 'selected' : ''; ?>>Top Rated</option>
+              <option value="newest" <?php echo ($sort === 'newest') ? 'selected' : ''; ?>>Newest</option>
+              <option value="oldest" <?php echo ($sort === 'oldest') ? 'selected' : ''; ?>>Oldest</option>
+              <option value="title_az" <?php echo ($sort === 'title_az') ? 'selected' : ''; ?>>Title (A–Z)</option>
+              <option value="title_za" <?php echo ($sort === 'title_za') ? 'selected' : ''; ?>>Title (Z–A)</option>
+            </select>
+          </label>
+        </div>
+      </form>
+    </header>
+
+    <section class="books-v2__grid" aria-label="Books">
+      <?php if (!empty($cur)) { ?>
+        <?php foreach ($cur as $result) {
+          $coverWebPath = "asset/images/covers/" . $result->IBSN . ".jpg";
+          $coverFsPath  = __DIR__ . '/' . $coverWebPath;
+          if (!file_exists($coverFsPath)) {
+            $coverWebPath = "asset/images/covers/default.jpg";
+          }
+
+          $desc = (string)($result->BookDesc ?? '');
+          if (strlen($desc) > 140) {
+            $desc = substr($desc, 0, 140) . '...';
+          }
+        ?>
+          <article class="books-v2__card">
+            <div class="books-v2__cover">
+              <img
+                src="<?php echo htmlspecialchars($coverWebPath, ENT_QUOTES, 'UTF-8'); ?>"
+                alt="<?php echo htmlspecialchars($result->BookTitle, ENT_QUOTES, 'UTF-8'); ?>"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="books-v2__card-body">
+              <div class="books-v2__pill">
+                <?php echo htmlspecialchars($result->Category, ENT_QUOTES, 'UTF-8'); ?>
+              </div>
+
+              <h3 class="books-v2__book-title">
+                <?php echo htmlspecialchars($result->BookTitle, ENT_QUOTES, 'UTF-8'); ?>
+              </h3>
+
+              <div class="books-v2__author">
+                <?php echo htmlspecialchars($result->Author, ENT_QUOTES, 'UTF-8'); ?>
+              </div>
+
+              <p class="books-v2__desc">
+                <?php echo htmlspecialchars($desc, ENT_QUOTES, 'UTF-8'); ?>
+              </p>
+            </div>
+
+            <div class="books-v2__card-footer">
+              <a class="books-v2__btn" href="index.php?q=bookdetails&id=<?php echo urlencode($result->IBSN); ?>">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                View Details
+              </a>
+            </div>
+          </article>
+        <?php } ?>
+      <?php } else { ?>
+        <div class="books-v2__empty">
+          No books found.
+        </div>
+      <?php } ?>
+    </section>
+
+    <?php if ($total_pages > 1) { ?>
+      <nav class="books-v2__pager" aria-label="Pagination">
+        <?php
+          $base = "index.php?q=books"
+                . "&category=" . urlencode($category)
+                . "&search=" . urlencode($search)
+                . "&sort=" . urlencode($sort);
+        ?>
+        <a class="books-v2__page <?php echo ($page <= 1) ? 'is-disabled' : ''; ?>"
+           href="<?php echo ($page <= 1) ? '#' : ($base . "&page=" . ($page - 1)); ?>">
+          Prev
+        </a>
+
+        <span class="books-v2__page-info">
+          Page <?php echo (int)$page; ?> of <?php echo (int)$total_pages; ?>
+        </span>
+
+        <a class="books-v2__page <?php echo ($page >= $total_pages) ? 'is-disabled' : ''; ?>"
+           href="<?php echo ($page >= $total_pages) ? '#' : ($base . "&page=" . ($page + 1)); ?>">
+          Next
+        </a>
+      </nav>
+    <?php } ?>
+  </div>
+</div>
+
+

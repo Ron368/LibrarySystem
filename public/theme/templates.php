@@ -115,7 +115,7 @@
                         </button>
                         <!-- End Toggle Nav Link For Mobiles -->
                         <a class="navbar-brand" href="<?php echo web_root;?>" style="display: flex; align-items: center;">
-                            <img src="<?php echo web_root;?>asset/images/logo.png" alt="" style="max-height: 50px;">
+                            <img src="<?php echo web_root;?>asset/images/alexandria-logo.png" alt="" style="max-height: 50px;">
                         </a>
                     </div>
                     <div class="navbar-collapse collapse">
@@ -132,9 +132,6 @@
                                 <a  class="<?php echo ($q=='find')? 'active' : ''?>" href="<?php echo web_root;?>index.php?q=find">Find Books</a>
                             </li> 
                             <li>
-                                <a class="<?php echo ($q=='announcements')? 'active' : ''?>" href="<?php echo web_root;?>index.php?q=announcements">Announcements</a>
-                            </li>
-                            <li>
                                 <a  class="<?php echo ($q=='about')? 'active' : ''?>" href="<?php echo web_root;?>index.php?q=about">About Us</a>
                             </li>
                             <li >
@@ -148,49 +145,33 @@
             <!-- End Header Logo & Naviagtion --> 
         </header>
 
-        <?php   
+        <?php
+  // Hide the big page header banner for selected pages
+  $hidePageHeader = in_array($q, ['books', 'find', 'about', 'contact', 'bookdetails'], true);
 
-        if ($q!='') {
+  if ($q != '' && !$hidePageHeader) {
+    echo '<div class="page-header">
+        <div class="overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>'.$title.'</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>';
+  }
+?>
 
-          echo '<div class="page-header">
-              <div class="overlay">
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-md-12">
-                              <h1>'.$title.'</h1>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>';
-
-        }
-
-        ?>
-              
-		<?php  require_once $content; ?>    
+<?php  require_once $content; ?>    
 
 
   <!-- Start Footer Section -->
         <section id="footer-section" class="footer-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="section-heading-2">
-                            <h3 class="section-title">
-                                <span>Address</span>
-                            </h3>
-                        </div>
-                        
-                        <div class="footer-address">
-                            <ul>
-                                <li class="footer-contact"><i class="fa fa-home"></i>J Rosales Ave. Butuan City, Butuan City, Philippines, 8600</li>
-                                <li class="footer-contact"><i class="fa fa-envelope"></i><a href="#">butuancitypubliclibrary@gmail.com</a></li>
-                                <li class="footer-contact"><i class="fa fa-phone"></i>+1 (123) 456-7890</li>
-                                <li class="footer-contact"><i class="fa fa-globe"></i><a href="https://www.butuan.gov.ph/" target="_blank">www.butuan.gov.ph</a></li>
-                            </ul>
-                        </div>
-                    </div><!--/.col-md-3 -->
+                    <!--/.col-md-3 -->
                     <div class="col-md-4">
                         <div class="section-heading-2">
                             <h3 class="section-title">
