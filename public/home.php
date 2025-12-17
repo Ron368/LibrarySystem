@@ -1,98 +1,44 @@
-       
-    <!-- Start Header Section -->
-    <div class="banner">
-        <div class="overlay">
-            <div class="container">
-                <div class="intro-text">
-                    <h1>Welcome To <span>Alexandria</span></h1>
-                    <p>Explore and Borrow Books <br> Through Butuan City's Online Library Management System</p> 
-                </div>
+<!-- Start Header Section -->
+    <div class="home-v2">
+    <div class="container">
+        <!-- Hero -->
+        <section class="home-v2__hero">
+        <div class="home-v2__hero-inner">
+            <div class="home-v2__hero-left">
+            <h1 class="home-v2__title">Welcome to Alexandria</h1>
+            <p class="home-v2__subtitle">
+                Explore and Borrow Books Through the<br>
+                innovative Online Library Management<br>
+                System
+            </p>
             </div>
+
+            <!-- Placeholder for hero image -->
+            <div class="home-v2__hero-right" aria-label="Hero image"></div>
         </div>
+        </section>
+
+        <!-- Feature tiles -->
+        <section class="home-v2__features">
+        <a class="home-v2__feature" href="index.php?q=books">
+            <div class="home-v2__feature-media home-v2__feature-media--discover" aria-label="Discover Books image"></div>
+            <div class="home-v2__feature-body">
+            <div class="home-v2__feature-title">Discover Books</div>
+            <div class="home-v2__feature-cta" aria-hidden="true"></div>
+            </div>
+        </a>
+
+        <a class="home-v2__feature" href="index.php?q=find">
+            <div class="home-v2__feature-media home-v2__feature-media--specific" aria-label="Find Specific Books image"></div>
+            <div class="home-v2__feature-body">
+            <div class="home-v2__feature-title">Find Specific Books</div>
+            <div class="home-v2__feature-cta" aria-hidden="true"></div>
+            </div>
+        </a>
+        </section>
+    </div>
     </div>
     <!-- End Header Section -->
-
-    <!-- Start Announcements Section -->
-    <section id="announcements-section" class="announcements-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title text-center wow fadeInDown" data-wow-duration="2s" data-wow-delay="50ms">
-                        <h2>Announcements & News</h2>
-                        <p>Stay updated with the latest from Alexandria Library</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <!-- Main Featured Announcement -->
-                <div class="col-lg-6 mb-4">
-                    <div class="featured-announcement papyrus-effect">
-                        <div class="announcement-badge">Featured</div>
-                        <img src="asset/images/announcement-bg.jpg" alt="Library Event" class="img-fluid">
-                        <div class="announcement-content">
-                            <div class="announcement-date">
-                                <span class="day">15</span>
-                                <span class="month">Jun</span>
-                            </div>
-                            <h3>Summer Reading Challenge 2025</h3>
-                            <p>Join our annual summer reading program with exciting prizes for all age groups. Registration opens June 20th.</p>
-                            <a href="index.php?q=announcements" class="btn btn-alexandria">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Secondary Announcements -->
-                <div class="col-lg-6">
-                    <div class="announcement-list">
-                        <!-- Announcement Item 1 -->
-                        <div class="announcement-item wow fadeInRight" data-wow-delay="100ms">
-                            <div class="announcement-icon">
-                                <i class="fa fa-book"></i>
-                            </div>
-                            <div class="announcement-text">
-                                <h4>New Digital Resources Added</h4>
-                                <p class="announcement-meta"><i class="fa fa-calendar-alt"></i> June 10, 2025</p>
-                                <p>We've expanded our library with new book entries.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Announcement Item 2 -->
-                        <div class="announcement-item wow fadeInRight" data-wow-delay="200ms">
-                            <div class="announcement-icon">
-                                <i class="fa fa-users"></i>
-                            </div>
-                            <div class="announcement-text">
-                                <h4>Author Meet & Greet</h4>
-                                <p class="announcement-meta"><i class="fa fa-calendar-alt"></i> June 25, 2025</p>
-                                <p>Local author Maria Santos will discuss her new novel "Island Whispers" at 2pm.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Announcement Item 3 -->
-                        <div class="announcement-item wow fadeInRight" data-wow-delay="300ms">
-                            <div class="announcement-icon">
-                                <i class="fa fa-clock"></i>
-                            </div>
-                            <div class="announcement-text">
-                                <h4>Holiday Hours Update</h4>
-                                <p class="announcement-meta"><i class="fa fa-calendar-alt"></i> June 12, 2025</p>
-                                <p>Special operating hours for Independence Day weekend - check before you visit.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- View All Link -->
-                        <div class="text-center mt-4">
-                            <a href="index.php?q=announcements" class="view-all-link">
-                                View All Announcements <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Announcements Section -->
         
     <!-- Start Call to Action Section -->
     <section class="call-to-action">
@@ -113,8 +59,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-title text-center wow fadeInDown" data-wow-duration="2s" data-wow-delay="50ms">
-                        <h2>Our Books</h2>
-                        <p>Available Books in the Library</p>
+                        <h1>Discover Your Next Great Read</h1>
+                        <p>Books available in the library</p>
                     </div>
                 </div>
             </div>
@@ -149,6 +95,32 @@
     </section>
     <!-- End Service Section -->
 
+    <!-- Specific Book Search (bottom section) -->
+    <section class="home-find">
+        <div class="container">
+            <h2 class="home-find__title">Got a specific book in mind?</h2>
+            <p class="home-find__subtitle">
+                Search through our extensive collection of books by title, author, or genre
+            </p>
+
+            <form class="home-find__form" action="index.php" method="GET" autocomplete="off">
+                <input type="hidden" name="q" value="find" />
+                <div class="home-find__field">
+                    <span class="home-find__icon" aria-hidden="true">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input
+                        class="home-find__input"
+                        type="text"
+                        name="query"
+                        placeholder="Search by Title, Author, or ISBN..."
+                        aria-label="Search by Title, Author, or ISBN"
+                    />
+                </div>
+            </form>
+        </div>
+    </section>
+
     <script>
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
@@ -178,5 +150,6 @@
         });
     });
     </script>
-        
- 
+
+
+

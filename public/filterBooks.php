@@ -11,7 +11,10 @@
         font-weight: bold; 
     }
     .desc {
-
+        font-size: 14px;        
+        color: #666;            
+        margin-top: 5px;        
+        line-height: 1.5;
     } 
     .searchagain{
         font-size: 20px; 
